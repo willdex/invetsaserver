@@ -1,4 +1,5 @@
 <?php
+include('enviar_correo/enviar_correo.php');
 $titulo="Respaldo de formulario del registrado.";
  
 $mensaje = '

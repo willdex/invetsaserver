@@ -26,6 +26,7 @@ $rpt_hoja=$hoja_verificacion->get_formulario_hoja_por_id($id_hoja);
 $rpt_empresa=$hoja_verificacion->get_formulario_empresa_por_id($id_hoja);
 $rpt_unidad=$hoja_verificacion->get_formulario_unidad_por_id($id_hoja);
 $rpt_tecnico=$hoja_verificacion->get_formulario_tecnico_por_id($id_hoja);
+$rpt_granja=$hoja_verificacion->get_formulario_granja_por_id($id_hoja);
 
 $rpt_accion=$accion->get_formulario_por_id_hoja($id_hoja);
 $rpt_manipulacion_dilucion=$manipulacion_dilucion->get_formulario_por_id_hoja($id_hoja);
@@ -172,7 +173,7 @@ $html.='
       <tr>
         <td style="text-align: left;  ">
          <b>Empresa: </b>'.$rpt_empresa->empresa.'  <br>
-         <b>Granja: </b>'.$rpt_granja->nombre.' <br>
+         <b>Granja: </b>'.$rpt_granja->unidad.' <br>
          <b>Unidad: </b>'.$rpt_unidad->unidad.'<br>
          <b>Responsable de Invetsa:</b> '.$rpt_hoja->responsable_invetsa.'<br>
       </td>
@@ -611,7 +612,13 @@ $html.='
                 </td>
 
                 <td  colspan="1"><b>
-                  '.$fila->puntaje.'</b>
+                  ';
+            if($fila->puntaje==0){
+              $html.=' <img width="15px" src="imagen/check_vacio.png" > ';
+            }else{
+              $html.=' <img width="15px" src="imagen/check.png" > ';
+            }
+               $html.='</b>
                 </td>
                 </tr>
               ';

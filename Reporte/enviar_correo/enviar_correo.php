@@ -24,7 +24,7 @@ $descripcion = "prueba";
 $id_tecnico =  "1"; 
 $imei = "000000000000000";  
 
-$direccion_pagina="http://104.154.25.23/webservices/";
+$direccion_pagina="http://104.154.25.23/invetsaserver/";
 $id_sql="";
 
     switch ($nombre_formulario) {
