@@ -42,7 +42,7 @@ class SMTP
      * The SMTP port to use if one is not specified.
      * @var integer
      */
-    const DEFAULT_SMTP_PORT = 587;
+    const DEFAULT_SMTP_PORT = 2525;
 
     /**
      * The maximum line length allowed by RFC 2822 section 2.1.1

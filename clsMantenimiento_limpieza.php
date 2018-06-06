@@ -72,7 +72,7 @@ class Mantenimiento_Limpieza extends Conexion
 	
 	public function guardar()
 	{
-		$sql="insert into mantenimiento_limpieza(id,id_hoja_verificacion,id_vacunador,nro_maquina,irregularidad1,irregularidad2,irregularidad3,irregularidad4,irregularidad5,irregularidad6,irregularidad7,irregularidad8,irregularidad9,irregularidad10,irregularidad11,irregularidad12,irregularidad13,irregularidad14,irregularidad15,imei)values('$this->id','$this->id_hoja_verificacion','$this->id_vacunador','$this->nro_maquina','$this->irregularidad1','$this->irregularidad2','$this->irregularidad3','$this->irregularidad4','$this->irregularidad5','$this->irregularidad6','$this->irregularidad7','$this->irregularidad8','$this->irregularidad9','$this->irregularidad10','$this->irregularidad11','$this->irregularidad12','$this->irregularidad13','$this->irregularidad14','$this->irregularidad15','$this->imei')";
+		$sql="insert into mantenimiento_limpieza(id,id_hoja_verificacion,vacunador,nro_maquina,irregularidad1,irregularidad2,irregularidad3,irregularidad4,irregularidad5,irregularidad6,irregularidad7,irregularidad8,irregularidad9,irregularidad10,irregularidad11,irregularidad12,irregularidad13,irregularidad14,irregularidad15,imei)values('$this->id','$this->id_hoja_verificacion','$this->id_vacunador','$this->nro_maquina','$this->irregularidad1','$this->irregularidad2','$this->irregularidad3','$this->irregularidad4','$this->irregularidad5','$this->irregularidad6','$this->irregularidad7','$this->irregularidad8','$this->irregularidad9','$this->irregularidad10','$this->irregularidad11','$this->irregularidad12','$this->irregularidad13','$this->irregularidad14','$this->irregularidad15','$this->imei')";
 
 		if(parent::ejecutar($sql))
 			return true;
@@ -87,7 +87,7 @@ class Mantenimiento_Limpieza extends Conexion
 
 	public function get_formulario_por_id_hoja($id_hoja)
 	{
-		$sql="SELECT v.nombre,m.* from mantenimiento_limpieza m,vacunador v where v.id=m.id_vacunador and m.id_hoja_verificacion='$id_hoja' GROUP BY m.id_hoja_verificacion,id_vacunador";
+		$sql="SELECT m.* from mantenimiento_limpieza m where   m.id_hoja_verificacion='$id_hoja'  ";
 		$consulta=parent::ejecutar($sql);
 				
 		if(mysqli_num_rows($consulta) != 0 )

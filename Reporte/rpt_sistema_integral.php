@@ -169,7 +169,7 @@ $html.='
          </td>
          <td align="center">
          <h2 >SIM (SISTEMA INTEGRAL DE MONITOREO)</h2>
-         <h3  >Invetsa Veterinaria S.A.</h3>
+         <h3  >INVERSIONES VETERINARIAS S.A.</h3>
         </td>
         <td>
          Codigo:'.$rpt_sim->codigo.'  <br>
@@ -194,6 +194,7 @@ $html.='
          GRANJA:'. $rpt_sim->granja.'<br>
          ZONA:'.$rpt_sim->zona.' <br>
          GALPON:'.$rpt_sim->codigo_galpon.'  <br>
+         ENCARGADO DE GRANJA:'.$rpt_sim->encargado_granja.'  <br>
       </td>
         
 
@@ -201,7 +202,7 @@ $html.='
          FECHA:'.$rpt_sim->fecha.'<br>
          EDAD:'.$rpt_sim->edad.' <br>
          SEXO:'.$rpt_sim->sexo.'<br>
-         Nro. de POLLOS:'.$rpt_sim->nro_pollos.'<br>
+         AVES EVALUADAS:'.$rpt_sim->nro_pollos.'<br>
         </td>
       </tr>
 
@@ -237,7 +238,7 @@ $html.='
               if($fila->id=="6")
               {
                 
-                $html.=' <tr style="background:#5c59a0; color:#fff;">';
+                $html.=' <tr style="background-color: #025522; ">';
                          
               }
               else
@@ -246,18 +247,40 @@ $html.='
                $html.=' <tr>';
                  
               }
-           $html.='
+          
+               if($fila->id=="6")
+              {
+                  $html.='
+                  <td  style="color: white; " ><b>'.$fila->peso_corporal.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->peso_bursa.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->peso_brazo.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->peso_timo.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->peso_higado.'</b></td>';
+                 $html.='
+                  <td  style="color: white; " ><b>'.$fila->indice_bursal.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->indice_timico.'</b></td>
+                  <td  style="color: white; " ><b>'.$fila->indice_hepatico.'</b></td>';
+                  $html.='<td  style="color: white; ">'.$fila->bursometro.'</b></td>';
+
+                         
+              }
+              else
+              {
+                  $html.='
                   <td>'.$fila->peso_corporal.'</td>
                   <td>'.$fila->peso_bursa.'</td>
                   <td>'.$fila->peso_brazo.'</td>
                   <td>'.$fila->peso_timo.'</td>
-                  <td>'.$fila->peso_higado.'</td>
-                  <td>'.$fila->indice_bursal.'</td>
-                  <td>'.$fila->indice_timico.'</td>
-                  <td>'.$fila->indice_hepatico.'</td>
-                  <td>'.$fila->bursometro.'</td>
-                  </tr>
-                  ';
+                  <td>'.$fila->peso_higado.'</td>';
+                $html.='
+                  <td style="background:#FEFEDA;">'.$fila->indice_bursal.'</td>
+                  <td style="background:#FEFEDA;">'.$fila->indice_timico.'</td>
+                  <td style="background:#FEFEDA;">'.$fila->indice_hepatico.'</td>';
+                   $html.='<td>'.$fila->bursometro.'</td>';
+                 
+              }
+
+                  $html.='</tr>';
             }
           }
           
@@ -286,6 +309,14 @@ $html.='
                 </th>
                 </tr>
               ';
+              if($objeto->id==13)
+              {
+               $html.=' <tr style="background-color: #025522;" >
+                  <td style="border: 1px solid #000; color:white;"> GRADO</td>
+                  <td style="border: 1px solid #000; color:white;"> CANTIDAD</td>
+                  </tr>';
+              }
+
               if($rpt_detalle_puntuacion!="-1"){
               while($fila=mysqli_fetch_object($rpt_detalle_puntuacion)){
            $html.='
@@ -318,7 +349,7 @@ $html.='</table>
 
 $html.='
 </div>
-<ul>
+ 
 <b>Observaciones:</b><br>
  '. $rpt_sim->observaciones.'
 <br>
@@ -327,13 +358,13 @@ $html.='
   '.$rpt_sim->comentarios.'
 <br>
 <br>
-</ul>';
+ ';
 
  
 
-$src_imagen_jefe='imagen/invetsa.png';
-$src_firma_invetsa='imagen/invetsa.png';
-$src_firma_empresa='imagen/invetsa.png';
+$src_imagen_jefe='imagen/jefe.jpg';
+$src_firma_invetsa='imagen/ic_camara.png';
+$src_firma_empresa='imagen/ic_camara.png';
 
 $src_imagen1="../".$rpt_sim->imagen1; 
 $src_imagen2="../".$rpt_sim->imagen2; 
@@ -355,54 +386,74 @@ $src_imagen10="../".$rpt_sim->imagen10;
 {
   $src_firma_empresa="../".$rpt_sim->firma_empresa;
 }
-if(file_exists("../".$rpt_sim->imagen_jefe))
-{
-  $src_imagen_jefe="../".$rpt_sim->imagen_jefe;
-}
-
+ 
 
 $html.='
  
 
          <table id=tabla_contenido border="0.5" cellpadding="3" bordercolor="#000000">
           <tr >
-            <th colspan="5"><font size="4">IMAGENES</font></th> 
+            <th ><font size="4">IMAGENES</font></th> 
           </tr>
             
             <tbody>
-              <TR>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen1.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen2.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen3.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen4.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen5.'"></td>
-              </TR>
-              <TR>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen6.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen7.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen8.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen9.'"></td>
-                <td style="background-color:#fff;"><img style="height: 200px; width: 200px;" src="'.$src_imagen10.'"></td>
-              </TR>
+              <TR>';
+              $html.=' <td> ';
+
+ if(file_exists($src_imagen1))
+{
+     $html.=' <img style="height: 200px; width: 200px;" src="'.$src_imagen1.'">';
+}
+ if(file_exists( $src_imagen2))
+{
+   $html.=' <img style="height: 200px; width: 200px;" src="'.$src_imagen2.'">';
+}
+if(file_exists($src_imagen3))
+{
+   $html.=' <img style="height: 200px; width: 200px;" src="'.$src_imagen3.'">';
+} 
+ if(file_exists($src_imagen4))
+{
+   $html.=' <img style="height: 200px; width: 200px;" src="'.$src_imagen4.'">';  
+}
+ if(file_exists( $src_imagen5))
+{
+   $html.=' <img style="height: 200px; width: 200px;" src="'.$src_imagen5.'">';
+}
+if(file_exists($src_imagen6))
+{
+   $html.='<img style="height: 200px; width: 200px;" src="'.$src_imagen6.'"> ';
+}     
+ if(file_exists($src_imagen7))
+{
+    $html.='<img style="height: 200px; width: 200px;" src="'.$src_imagen7.'"> ';
+}
+ if(file_exists( $src_imagen8))
+{
+  $html.='<img style="height: 200px; width: 200px;" src="'.$src_imagen8.'"> '; 
+}
+if(file_exists($src_imagen9))
+{
+  $html.='<img style="height: 200px; width: 200px;" src="'.$src_imagen9.'"> '; 
+}     
+ if(file_exists($src_imagen10))
+{
+  $html.='<img style="height: 200px; width: 200px;" src="'.$src_imagen10.'"> ';  
+} 
+
+
+              $html.=' </td> ';
+              $html.=' </TR>';
             
-          
+     $html.=' </tbody>       
+      </table>';
+
+  
+
+
+
+$html.='
  
-            </tbody>       
-      </table>
-
- 
-
-
- <table id=tabla_contenido class="foto1">
-<tr>
-<th>IMAGEN DEL RESPONSABLE</th>
-</tr>
-<tr>
-<td>
-<img src="'.$src_imagen_jefe.'" width="300px" />
-</td>
-</tr>
-</table>
 <br>
 <br>
 <br>
@@ -410,15 +461,19 @@ $html.='
  
  <table id=tabla_contenido class="foto2">
 <tr>
-<th>JEFE DE PLANTA DE INCUBACIÓN</th>
-<th>FIRMA INVETSA</th>
+<th>Encargado de Granja</th>
+<th>Firmado por Invetsa</th>
 </tr>
 <tr>
-<td>
-<img src="'.$src_firma_empresa.'" width="300px"/>
+<td align=center>
+<img src="'.$src_firma_empresa.'" width="300px"/><br>
+<center>'.$rpt_sim->encargado_granja.'<BR>
+ENCARGADO DE GRANJA</center>
 </td>
 <td>
-<img src="'.$src_firma_invetsa.'" width="300px"/>
+<img src="'.$src_firma_invetsa.'" width="300px"/><br>
+<center>'.$rpt_sim->tecnico.'<br>
+TECNICO</center>
 </td>
 </tr> </table>
 

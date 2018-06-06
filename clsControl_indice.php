@@ -106,7 +106,7 @@ class Control_indice extends Conexion
 	public function guardar()
 	{
     
-		$sql="INSERT into control_indice(id,id_hoja_verificacion,id_vacunador,nro_heridos,nro_mala_posicion,nro_mojados,nro_pollos_controlados,nro_pollos_no_vacunados,nro_pollos_vacunado,nro_pollos_vacunados_correctamente,puntaje,imei,indice_eficiencia)values('$this->id','$this->id_hoja_verificacion','$this->id_vacunador','$this->nro_heridos','$this->nro_mala_posicion','$this->nro_mojados','$this->nro_pollos_controlados','$this->nro_pollos_no_vacunados','$this->nro_pollos_vacunado','$this->nro_pollos_vacunados_correctamente','$this->puntaje','$this->imei','$this->indice_eficiencia')";
+		$sql="INSERT into control_indice(id,id_hoja_verificacion,vacunador,nro_heridos,nro_mala_posicion,nro_mojados,nro_pollos_controlados,nro_pollos_no_vacunados,nro_pollos_vacunado,nro_pollos_vacunados_correctamente,puntaje,imei,indice_eficiencia)values('$this->id','$this->id_hoja_verificacion','$this->id_vacunador','$this->nro_heridos','$this->nro_mala_posicion','$this->nro_mojados','$this->nro_pollos_controlados','$this->nro_pollos_no_vacunados','$this->nro_pollos_vacunado','$this->nro_pollos_vacunados_correctamente','$this->puntaje','$this->imei','$this->indice_eficiencia')";
  
 		if(parent::ejecutar($sql))
 			return true;
@@ -120,7 +120,7 @@ class Control_indice extends Conexion
 	}	
 	public function get_formulario_por_id_hoja($id_hoja)
 	{
-		$sql="SELECT c.*,v.nombre as'vacunador' from control_indice c,vacunador v WHERE c.id_vacunador=v.id and  c.id_hoja_verificacion='$id_hoja' order by c.id asc";
+		$sql="SELECT c.*,v.vacunador as'vacunador' from control_indice c,mantenimiento_limpieza v WHERE c.id_hoja_verificacion=v.id_hoja_verificacion and  c.id_hoja_verificacion='$id_hoja' order by c.id asc";
 		$consulta=parent::ejecutar($sql);
 				
 		if(mysqli_num_rows($consulta) != 0 )

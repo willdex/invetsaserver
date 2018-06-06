@@ -15,14 +15,14 @@ $id_tecnico = $dato['id_tecnico'];
 $imei = $dato['imei']; 
 */
 
-$para_tecnico  = "edgarq354@gmail.com" ; 
-$para_cliente  = "edgarq354@gmail.com" ;  
+$para_tecnico  = "info@invetsa.com" ; 
+$para_cliente  = "info@invetsa.com" ;  
 $nombre_tecnico = "CARLOS DELGADO";
 $nombre_formulario ="FORMULARIO HOJA";
-$id_formulario ="29"; 
+$id_formulario ="44"; 
 $descripcion = "prueba"; 
-$id_tecnico =  "1"; 
-$imei = "000000000000000";  
+$id_tecnico =  "9"; 
+$imei = "359674060694113";  
 
 $direccion_pagina="http://104.154.25.23/invetsaserver/";
 $id_sql="";

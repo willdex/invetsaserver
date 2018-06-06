@@ -467,12 +467,13 @@ else
             $imagen_jefe=$obj->imagen_jefe;
             $comentarios=$obj->comentarios;
             $referencia=$obj->referencia;
+            $encargado_granja=$obj->encargado_granja;
             
             $sistema_integral_m=new Sistema_Integral();
             
             $sistema_integral_m->preparar($codigo,$edad,$id_empresa,$id_galpon,$id_granja,
               $imagen1,$imagen2,$imagen3,$imagen4,$imagen5,$imagen6,$imagen7,$imagen8,$imagen9,$imagen10,
-              $observaciones,$revision,$fecha,$nro_pollos,$sexo,$id,$imei,$firma_invetsa,$firma_empresa,$id_tecnico,$imagen_jefe,$comentarios,$referencia);
+              $observaciones,$revision,$fecha,$nro_pollos,$sexo,$id,$imei,$firma_invetsa,$firma_empresa,$id_tecnico,$imagen_jefe,$comentarios,$referencia,$encargado_granja);
 
             $exi=$sistema_integral_m->existe_id_sqlite($id,$imei);
             
@@ -648,9 +649,7 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
                         $hora_ingreso=$obj->hora_ingreso;
                         $hora_salida=$obj->hora_salidas;
                         $id_sqlite=$obj->id;
-                        $id_empresa=$obj->id_empresa;
-                        $id_unidad=$obj->id_unidad;
-                        $id_granja=$obj->id_granja;
+                        $id_empresa=$obj->id_empresa; 
                         $productividad=$obj->productividad;
                         $promedio_mantenimiento=$obj->promedio_mantenimiento;
                         $puntaje_control_indice=$obj->puntaje_control_indice;
@@ -667,10 +666,23 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
                         $irregularidad_15=$obj->irregularidad_15;
                         $recomendaciones=$obj->recomendaciones;
                         $otras_irregularidades=$obj->otras_irregularidades;
+                        $unidad=$obj->unidad;
+
+                          $imagen1=$obj->imagen1;
+                          $imagen2=$obj->imagen2;
+                          $imagen3=$obj->imagen3;
+                          $imagen4=$obj->imagen4;
+                          $imagen5=$obj->imagen5;
+                          $imagen6=$obj->imagen6;
+                          $imagen7=$obj->imagen7;
+                          $imagen8=$obj->imagen8;
+                          $imagen9=$obj->imagen9;
+                          $imagen10=$obj->imagen10;
+                      
 
 
                        $hoja_verificacion=new Hoja_verificacion();
-                       $hoja_verificacion->Hoja_verificacion2($codigo,$firma_empresa,$firma_invetsa,$hora_ingreso,$hora_salida,$id_sqlite,$id_empresa,$id_unidad,$id_granja,$productividad,$promedio_mantenimiento,$puntaje_control_indice,$revision,$sumatoria_manipulacion_vacuna,$imei,$fecha,$id_tecnico,$imagen_jefe,$responsable_invetsa,$responsable_incubadora,$total_vc,$puntaje_total,$irregularidad_15,$recomendaciones,$otras_irregularidades);
+                       $hoja_verificacion->Hoja_verificacion2($codigo,$firma_empresa,$firma_invetsa,$hora_ingreso,$hora_salida,$id_sqlite,$id_empresa,$productividad,$promedio_mantenimiento,$puntaje_control_indice,$revision,$sumatoria_manipulacion_vacuna,$imei,$fecha,$id_tecnico,$imagen_jefe,$responsable_invetsa,$responsable_incubadora,$total_vc,$puntaje_total,$irregularidad_15,$recomendaciones,$otras_irregularidades,$unidad,$imagen1,$imagen2,$imagen3,$imagen4,$imagen5,$imagen6,$imagen7,$imagen8,$imagen9,$imagen10);
 
 
                        $exi=$hoja_verificacion->existe_id_sqlite($id_sqlite,$imei);
@@ -842,7 +854,7 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
 
                     $id=$obj->id;
                     $id_hoja_verificacion=$obj->id_hoja_verificacion;
-                    $id_vacunador=$obj->id_vacunador;
+                    $vacunador=$obj->vacunador;
                     $nro_maquina=$obj->nro_maquina;
                     $irregularidad1=$obj->irregularidad1;
                     $irregularidad2=$obj->irregularidad2;
@@ -866,7 +878,7 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
                    $id_hoja_verificacion=$hoja_verificacion->get_id_por_sqlite($id_hoja_verificacion,$imei);
                   
                    $mantenimiento_limpieza=new Mantenimiento_limpieza();
-                   $mantenimiento_limpieza->preparar($id,$id_hoja_verificacion,$id_vacunador,$nro_maquina,$irregularidad1,$irregularidad2,$irregularidad3,$irregularidad4,$irregularidad5,$irregularidad6,$irregularidad7,$irregularidad8,$irregularidad9,$irregularidad10,$irregularidad11,$irregularidad12,$irregularidad13,$irregularidad14,$irregularidad15,$imei);
+                   $mantenimiento_limpieza->preparar($id,$id_hoja_verificacion,$vacunador,$nro_maquina,$irregularidad1,$irregularidad2,$irregularidad3,$irregularidad4,$irregularidad5,$irregularidad6,$irregularidad7,$irregularidad8,$irregularidad9,$irregularidad10,$irregularidad11,$irregularidad12,$irregularidad13,$irregularidad14,$irregularidad15,$imei);
         
                    if($id_hoja_verificacion!=-1)
                    {
@@ -888,7 +900,7 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
 
                     $id_sqlite=$obj->id;
                     $id_hoja_verificacion=$obj->id_hoja_verificacion;
-                    $id_vacunador=$obj->id_vacunador;
+                    $vacunador=$obj->vacunador;
                     $nro_heridos=$obj->nro_heridos;
                     $nro_mala_posicion=$obj->nro_mala_posicion;
                     $nro_mojados=$obj->nro_mojados;
@@ -908,7 +920,7 @@ function cargar_hoja_verificacion($js_hoja_verificacion,$js_accion,$js_detalle_a
                    $control_indice->preparar(
                     $id_sqlite,
                     $id_hoja_verificacion,
-                    $id_vacunador,
+                    $vacunador,
                     $nro_heridos,
                     $nro_mala_posicion,
                     $nro_mojados,
@@ -1044,7 +1056,7 @@ if($total_HV==$registrado_HV && $total_LG==$registrado_LG && $total_CI==$registr
  }
  else
  {
- //echo "total_HV=".$total_HV." registrado_HV=".$registrado_HV." total_LG=".$total_LG." registrado_LG=".$registrado_LG." total_CI=".$total_CI." registrado_CI=".$registrado_CI." total_MD=".$total_MD." registrado_MD=".$registrado_MD." total_DA=".$total_DA." registrado_DA=".$registrado_DA." total_AC=".$total_AC." registrado_AC=".$registrado_AC." total_VC=".$total_VC." registrado_VC=".$registrado_VC." id_HV".$id_HV." total_HV=".$total_HV;
+ echo "total_HV=".$total_HV." registrado_HV=".$registrado_HV." total_LG=".$total_LG." registrado_LG=".$registrado_LG." total_CI=".$total_CI." registrado_CI=".$registrado_CI." total_MD=".$total_MD." registrado_MD=".$registrado_MD." total_DA=".$total_DA." registrado_DA=".$registrado_DA." total_AC=".$total_AC." registrado_AC=".$registrado_AC." total_VC=".$total_VC." registrado_VC=".$registrado_VC." id_HV".$id_HV." total_HV=".$total_HV;
   
         $hoja_m2=new Hoja_verificacion();
         $sw=$hoja_m2->vaciar_registro($id_HV);

@@ -29,6 +29,17 @@ class Hoja_verificacion extends Conexion
 	private $irregularidad_15;
 	private $recomendaciones;
 	private $otras_irregularidades;
+	private $unidad;
+	private $imagen1;
+	private $imagen2;
+	private $imagen3;
+	private $imagen4;
+	private $imagen5;
+	private $imagen6;
+	private $imagen7;
+	private $imagen8;
+	private $imagen9;
+	private $imagen10;
 	
 	//construtor
 	public function Hoja_verificacion()
@@ -59,9 +70,20 @@ class Hoja_verificacion extends Conexion
 		$this->irregularidad_15="";
 		$this->recomendaciones="";
 		$this->otras_irregularidades="";
+		$this->unidad=0;
+		$this->imagen1="";
+		$this->imagen2="";
+		$this->imagen3="";
+		$this->imagen4="";
+		$this->imagen5="";
+		$this->imagen6="";
+		$this->imagen7="";
+		$this->imagen8="";
+		$this->imagen9="";
+		$this->imagen10="";
 
 	}
-	public function Hoja_verificacion2($codigo,$firma_empresa,$firma_invetsa,$hora_ingreso,$hora_salida,$id_sqlite,$id_empresa,$id_unidad,$id_granja,$productividad,$promedio_mantenimiento,$puntaje_control_indice,$revision,$sumatoria_manipulacion_vacuna,$imei,$fecha,$id_tecnico,$imagen_jefe,$responsable_invetsa,$responsable_incubadora,$total_vc,$puntaje_total,$irregularidad_15,$recomendaciones,$otras_irregularidades)
+	public function Hoja_verificacion2($codigo,$firma_empresa,$firma_invetsa,$hora_ingreso,$hora_salida,$id_sqlite,$id_empresa,$productividad,$promedio_mantenimiento,$puntaje_control_indice,$revision,$sumatoria_manipulacion_vacuna,$imei,$fecha,$id_tecnico,$imagen_jefe,$responsable_invetsa,$responsable_incubadora,$total_vc,$puntaje_total,$irregularidad_15,$recomendaciones,$otras_irregularidades,$unidad,$imagen1,$imagen2,$imagen3,$imagen4,$imagen5,$imagen6,$imagen7,$imagen8,$imagen9,$imagen10)
 	{
 		$this->codigo=$codigo;
 		$this->firma_empresa=$firma_empresa;
@@ -69,9 +91,7 @@ class Hoja_verificacion extends Conexion
 		$this->hora_ingreso=$hora_ingreso;
 		$this->hora_salida=$hora_salida;
 		$this->id_sqlite=$id_sqlite;
-		$this->id_empresa=$id_empresa;
-		$this->id_unidad=$id_unidad;
-		$this->id_granja=$id_granja;
+		$this->id_empresa=$id_empresa; 
 		$this->productividad=$productividad;
 		$this->promedio_mantenimiento=$promedio_mantenimiento;
 		$this->puntaje_control_indice=$puntaje_control_indice;
@@ -88,6 +108,18 @@ class Hoja_verificacion extends Conexion
 		$this->irregularidad_15=$irregularidad_15;
 		$this->recomendaciones=$recomendaciones;
 		$this->otras_irregularidades=$otras_irregularidades;
+		$this->unidad=$unidad; 
+		$this->imagen1=$imagen1; 
+		$this->imagen2=$imagen2; 
+		$this->imagen3=$imagen3; 
+		$this->imagen4=$imagen4; 
+		$this->imagen5=$imagen5; 
+		$this->imagen6=$imagen6; 
+		$this->imagen7=$imagen7; 
+		$this->imagen8=$imagen8; 
+		$this->imagen9=$imagen9; 
+		$this->imagen10=$imagen10; 
+		 
 
 	}
 
@@ -149,9 +181,9 @@ class Hoja_verificacion extends Conexion
 	}
 	public function guardar()
 	{
-     $sql="INSERT INTO hoja_verificacion(codigo,hora_ingreso,hora_salida,id_empresa,id_unidad,id_granja,productividad,promedio_mantenimiento,puntaje_control_indice,revision,sumatoria_manipulacion_vacuna,imei,id_sqlite,fecha,id_tecnico,responsable_invetsa,responsable_incubadora,total_vc,puntaje_total,irregularidad_15,recomendaciones,otras_irregularidades) values('$this->codigo','$this->hora_ingreso','$this->hora_salida','$this->id_empresa','$this->id_unidad','$this->id_granja','$this->productividad','$this->promedio_mantenimiento','$this->puntaje_control_indice','$this->revision','$this->sumatoria_manipulacion_vacuna','$this->imei','$this->id_sqlite','$this->fecha','$this->id_tecnico','$this->responsable_invetsa','$this->responsable_incubadora','$this->total_vc','$this->puntaje_total','$this->irregularidad_15','$this->recomendaciones','$this->otras_irregularidades')";
+     $sql="INSERT INTO hoja_verificacion(codigo,hora_ingreso,hora_salida,id_empresa, productividad,promedio_mantenimiento,puntaje_control_indice,revision,sumatoria_manipulacion_vacuna,imei,id_sqlite,fecha,id_tecnico,responsable_invetsa,responsable_incubadora,total_vc,puntaje_total,irregularidad_15,recomendaciones,otras_irregularidades,unidad) values('$this->codigo','$this->hora_ingreso','$this->hora_salida','$this->id_empresa', '$this->productividad','$this->promedio_mantenimiento','$this->puntaje_control_indice','$this->revision','$this->sumatoria_manipulacion_vacuna','$this->imei','$this->id_sqlite','$this->fecha','$this->id_tecnico','$this->responsable_invetsa','$this->responsable_incubadora','$this->total_vc','$this->puntaje_total','$this->irregularidad_15','$this->recomendaciones','$this->otras_irregularidades','$this->unidad')";
 
-	
+	 
 		$id_hoja=parent::ejecutar_obtener_id($sql);
 
 		if($id_hoja!="-1")
@@ -159,11 +191,35 @@ class Hoja_verificacion extends Conexion
 		$direccion_firma_invetsa="hoja_verificacion/firma/".$id_hoja."_firma_invetsa_".$this->fecha.".png";
 		$direccion_firma_empresa="hoja_verificacion/firma/".$id_hoja."_firma_empresa_".$this->fecha.".png";
 		$direccion_imagen_jefe="hoja_verificacion/imagen/".$id_hoja."_foto_jefe_".$this->fecha.".png";
+
+		$direccion_imagen1="hoja_verificacion/imagen/".$id_hoja."_imagen1_".$this->fecha.".png";
+		$direccion_imagen2="hoja_verificacion/imagen/".$id_hoja."_imagen2_".$this->fecha.".png";
+		$direccion_imagen3="hoja_verificacion/imagen/".$id_hoja."_imagen3_".$this->fecha.".png";
+		$direccion_imagen4="hoja_verificacion/imagen/".$id_hoja."_imagen4_".$this->fecha.".png";
+		$direccion_imagen5="hoja_verificacion/imagen/".$id_hoja."_imagen5_".$this->fecha.".png";
+		$direccion_imagen6="hoja_verificacion/imagen/".$id_hoja."_imagen6_".$this->fecha.".png";
+		$direccion_imagen7="hoja_verificacion/imagen/".$id_hoja."_imagen7_".$this->fecha.".png";
+		$direccion_imagen8="hoja_verificacion/imagen/".$id_hoja."_imagen8_".$this->fecha.".png";
+		$direccion_imagen9="hoja_verificacion/imagen/".$id_hoja."_imagen9_".$this->fecha.".png";
+		$direccion_imagen10="hoja_verificacion/imagen/".$id_hoja."_imagen10_".$this->fecha.".png";
 		
 		$this->guardar_imagen_png($this->firma_invetsa,$direccion_firma_invetsa);
 		$this->guardar_imagen_png($this->firma_empresa,$direccion_firma_empresa);
 		$this->guardar_imagen_png($this->imagen_jefe,$direccion_imagen_jefe);
- 		$actualizar="UPDATE hoja_verificacion set firma_invetsa='$direccion_firma_invetsa', firma_empresa='$direccion_firma_empresa', imagen_jefe='$direccion_imagen_jefe' where id='$id_hoja'";
+
+		$this->guardar_imagen_png($this->imagen1,$direccion_imagen1);
+		$this->guardar_imagen_png($this->imagen2,$direccion_imagen2);
+		$this->guardar_imagen_png($this->imagen3,$direccion_imagen3);
+		$this->guardar_imagen_png($this->imagen4,$direccion_imagen4);
+		$this->guardar_imagen_png($this->imagen5,$direccion_imagen5);
+		$this->guardar_imagen_png($this->imagen6,$direccion_imagen6);
+		$this->guardar_imagen_png($this->imagen7,$direccion_imagen7);
+		$this->guardar_imagen_png($this->imagen8,$direccion_imagen8);
+		$this->guardar_imagen_png($this->imagen9,$direccion_imagen9);
+		$this->guardar_imagen_png($this->imagen10,$direccion_imagen10);
+
+
+ 		$actualizar="UPDATE hoja_verificacion set firma_invetsa='$direccion_firma_invetsa', firma_empresa='$direccion_firma_empresa', imagen_jefe='$direccion_imagen_jefe',imagen1='$imagen1',imagen2='$imagen2',imagen3='$imagen3',imagen4='$imagen4',imagen5='$imagen5',imagen6='$imagen6',imagen7='$imagen7',imagen8='$imagen8',imagen9='$imagen9',imagen10='$imagen10' where id='$id_hoja'";
 		
 		$actualizado=parent::ejecutar($actualizar);
 
@@ -205,6 +261,20 @@ class Hoja_verificacion extends Conexion
 		}
 	}									
 
+	public function get_id_por_sqlite_imei_tecnico($id_sqlite,$imei,$id_tecnico)
+	{
+		$sql="SELECT id from hoja_verificacion where id_sqlite='$id_sqlite' and imei='$imei' and id_tecnico='$id_tecnico' limit 1";
+		$consulta=parent::ejecutar($sql);
+		
+		if(mysqli_num_rows($consulta) != 0)
+		{
+			return mysqli_fetch_assoc($consulta)['id'];
+		}
+		else
+		{
+			return "-1";
+		}
+	}
 	public function guardar_imagen($dato,$file)
 	{
 		if($dato!="")
@@ -313,7 +383,7 @@ class Hoja_verificacion extends Conexion
 	}		
 	public function get_formulario_unidad_por_id($id_formulario)
 	{
-		$sql="SELECT u.nombre as 'unidad'  FROM hoja_verificacion s, unidad u  WHERE  s.id_unidad=u.id   and s.id='$id_formulario' ";
+		$sql="SELECT u.codigo as 'unidad'  FROM hoja_verificacion s, galpon u  WHERE  s.id_unidad=u.id   and s.id='$id_formulario' ";
 		$consulta=parent::ejecutar($sql);
 				
 		if(mysqli_num_rows($consulta) != 0 )

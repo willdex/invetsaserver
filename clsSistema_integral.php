@@ -31,6 +31,7 @@ class Sistema_Integral extends Conexion
 	private $imagen_jefe;
 	private $comentarios;
 	private $referencia;
+	private $encargado_granja;
 
 	public function Sistema_Integral()
 	{
@@ -64,12 +65,13 @@ class Sistema_Integral extends Conexion
 		$this->imagen_jefe="";
 		$this->comentarios="";
 		$this->referencia="";
+		$this->encargado_granja="";
 
 		}
 		
 	public function preparar($codigo,$edad,$id_empresa,$id_galpon,$id_granja,
 		$imagen1,$imagen2,$imagen3,$imagen4,$imagen5,$imagen6,$imagen7,$imagen8,$imagen9,$imagen10,
-		$observaciones,$revision,$fecha,$nro_pollos,$sexo,$id_sqlite,$imei,$firma_invetsa,$firma_empresa,$id_tecnico,$imagen_jefe,$comentarios,$referencia)
+		$observaciones,$revision,$fecha,$nro_pollos,$sexo,$id_sqlite,$imei,$firma_invetsa,$firma_empresa,$id_tecnico,$imagen_jefe,$comentarios,$referencia,$encargado_granja)
 	{
 		$this->codigo=$codigo;
 		$this->edad=$edad;	
@@ -99,6 +101,7 @@ class Sistema_Integral extends Conexion
 		$this->imagen_jefe=$imagen_jefe;
 		$this->comentarios=$comentarios;
 		$this->referencia=$referencia;
+		$this->encargado_granja=$encargado_granja;
 	}
 	public function get_codigo()
 	{
@@ -180,7 +183,7 @@ class Sistema_Integral extends Conexion
 	
 	public function guardar()
 	{
-		$sql="INSERT into sistema_integral(codigo,edad,id_empresa,id_galpon,id_granja,observaciones,revision,fecha,nro_pollos,sexo,id_sqlite,imei,id_tecnico,comentarios,referencia)values('$this->codigo','$this->edad','$this->id_empresa','$this->id_galpon','$this->id_granja','$this->observaciones','$this->revision','$this->fecha','$this->nro_pollos','$this->sexo','$this->id_sqlite','$this->imei','$this->id_tecnico','$this->comentarios','$this->referencia')";
+		$sql="INSERT into sistema_integral(codigo,edad,id_empresa,id_galpon,id_granja,observaciones,revision,fecha,nro_pollos,sexo,id_sqlite,imei,id_tecnico,comentarios,referencia,encargado_granja)values('$this->codigo','$this->edad','$this->id_empresa','$this->id_galpon','$this->id_granja','$this->observaciones','$this->revision','$this->fecha','$this->nro_pollos','$this->sexo','$this->id_sqlite','$this->imei','$this->id_tecnico','$this->comentarios','$this->referencia','$this->encargado_granja')";
 		
 
 		$id_sistema=parent::ejecutar_obtener_id($sql);
@@ -264,6 +267,21 @@ class Sistema_Integral extends Conexion
 	{
 		$sql="SELECT id from sistema_integral where id_sqlite='$id_sqlite' and imei='$imei' limit 1";
 
+		$consulta=parent::ejecutar($sql);
+		
+		if(mysqli_num_rows($consulta) != 0)
+		{
+			return mysqli_fetch_assoc($consulta)['id'];
+		}
+		else
+		{
+			return "-1";
+		}
+	}
+
+	public function get_id_por_sqlite_imei_tecnico($id_sqlite,$imei,$id_tecnico)
+	{
+		$sql="SELECT id from sistema_integral where id_sqlite='$id_sqlite' and imei='$imei' and id_tecnico='$id_tecnico' limit 1";
 		$consulta=parent::ejecutar($sql);
 		
 		if(mysqli_num_rows($consulta) != 0)
